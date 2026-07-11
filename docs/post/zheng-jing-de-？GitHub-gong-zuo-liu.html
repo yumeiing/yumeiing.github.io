@@ -11,10 +11,10 @@
         document.documentElement.setAttribute("data-color-mode", theme);
     </script>
 <meta name="description" content="## 介绍   
-还在`clone`、`commit`、`push`无脑管理项目吗，到时候bug都甩锅。">
+无废话，纯干货，掌握严谨的***GitHub工作流***，维护`个人项目`和参与`开源项目`都嘎嘎好用。">
 <meta property="og:title" content="正经的？GitHub工作流">
 <meta property="og:description" content="## 介绍   
-还在`clone`、`commit`、`push`无脑管理项目吗，到时候bug都甩锅。">
+无废话，纯干货，掌握严谨的***GitHub工作流***，维护`个人项目`和参与`开源项目`都嘎嘎好用。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://yumeiing.github.io/post/zheng-jing-de-%EF%BC%9FGitHub-gong-zuo-liu.html">
 <meta property="og:image" content="https://avatars.githubusercontent.com/u/214359879?s=400&u=9b6a510602a0a32a6be6b018b7e8a384abf2c576&v=4">
@@ -86,79 +86,39 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </div>
     <div id="content">
 <div class="markdown-body" id="postBody"><h2>介绍</h2>
-<p>还在<code class="notranslate">clone</code>、<code class="notranslate">commit</code>、<code class="notranslate">push</code>无脑管理项目吗，到时候bug都甩锅。<br>
-来无废话，纯干货，掌握严谨的<em><strong>GitHub工作流</strong></em>，维护<code class="notranslate">个人项目</code>和参与<code class="notranslate">开源项目</code>都嘎嘎好用。</p>
+<p>无废话，纯干货，掌握严谨的<em><strong>GitHub工作流</strong></em>，维护<code class="notranslate">个人项目</code>和参与<code class="notranslate">开源项目</code>都嘎嘎好用。<br>
+建议有一定git基础的人看。</p>
 <h2>来源</h2>
 <blockquote>
 <p>免责声明：<br>
 本人不常用git，见<a href="https://yumeiing.github.io/about.html" rel="nofollow">关于</a>。<br>
-有错误还请见谅。。。</p>
+有错误还请见谅...</p>
 </blockquote>
 <p>源自bilibili<a href="https://www.bilibili.com/video/BV19e4y1q7JJ/" rel="nofollow">码农高天的视频</a>，原视频讲得很生动详细，但我也会尽力做一些补充。</p>
 <h2>流程</h2>
 <h3>开始（拷贝项目）</h3>
 <p>我们假设GitHub上有一个项目，先把项目<code class="notranslate">fork</code>你自己的仓库。<br>
 再假设项目的<code class="notranslate">main</code> branch中有一个commit为<code class="notranslate">init</code></p>
-<div class="highlight highlight-source-mermaid"><pre class="notranslate"><span class="pl-k">graph</span> <span class="pl-c1">TD</span>
-    <span class="pl-k">subgraph</span> <span class="pl-en">GitHub</span>
-        <span class="pl-ent">b1p1</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">{{</span></span> main\master <span class="pl-pds"><span class="pl-sg">}}</span></span></span>
-        <span class="pl-ent">b2p1</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">(</span></span> init <span class="pl-pds"><span class="pl-sg">)</span></span></span>
-        <span class="pl-ent">b1p1</span><span class="pl-k">--&gt;</span><span class="pl-ent">b2p1</span>
-    <span class="pl-k">end</span></pre></div>
 <p>我们将共享的远端仓库，即GitHub，称为<code class="notranslate">remote</code>。<br>
 当我们想修改或贡献代码的时候，第1件事就是将remote的仓库<code class="notranslate">clone</code>到本地。</p>
 <div class="highlight highlight-source-shell"><pre class="notranslate">git clone https://github.com/your_name/example.git
 <span class="pl-c"><span class="pl-c">#</span> 克隆你的仓库到本地</span></pre></div>
-<div class="highlight highlight-source-mermaid"><pre class="notranslate"><span class="pl-k">graph</span> <span class="pl-c1">TD</span>
-    <span class="pl-k">subgraph</span> <span class="pl-en">Remote</span>
-        <span class="pl-ent">b1p1</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">{{</span></span> main/master <span class="pl-pds"><span class="pl-sg">}}</span></span></span>
-        <span class="pl-ent">b2p1</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">(</span></span> init <span class="pl-pds"><span class="pl-sg">)</span></span></span>
-        <span class="pl-ent">b1p1</span><span class="pl-k">--&gt;</span><span class="pl-ent">b2p1</span>
-    <span class="pl-k">end</span>
-    <span class="pl-k">subgraph</span> <span class="pl-en">Local</span>
-        <span class="pl-ent">b1p2</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">{{</span></span> main/master <span class="pl-pds"><span class="pl-sg">}}</span></span></span>
-        <span class="pl-ent">b2p2</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">(</span></span> init <span class="pl-pds"><span class="pl-sg">)</span></span></span>
-        <span class="pl-ent">b1p2</span><span class="pl-k">-.-&gt;</span><span class="pl-ent">b2p2</span>
-    <span class="pl-k">end</span>
-    <span class="pl-k">subgraph</span> <span class="pl-en">Disk</span>
-        <span class="pl-ent">b1p3</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">{{</span></span> main/master <span class="pl-pds"><span class="pl-sg">}}</span></span></span>
-        <span class="pl-ent">b2p3</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">(</span></span> init <span class="pl-pds"><span class="pl-sg">)</span></span></span>
-        <span class="pl-ent">b1p3</span><span class="pl-k">-.-&gt;</span><span class="pl-ent">b2p3</span>
-    <span class="pl-k">end</span>
-    <span class="pl-ent">b2p1</span><span class="pl-k">-.</span><span class="pl-s">'git clone https://github,com/your_name/example,git'</span><span class="pl-k">.-&gt;</span><span class="pl-ent">b2p2</span><span class="pl-k">-.-&gt;</span><span class="pl-ent">b2p3</span></pre></div>
 <p>你就成功获得了一个<code class="notranslate">main/master</code>分支（以下统称<code class="notranslate">main</code>）<br>
-<code class="notranslate">local</code>为git的本地仓库(未显示工作去与暂存区)，数据一般在<code class="notranslate">.../example/.git</code>文件夹下，<br>
-<code class="notranslate">disk</code>为项目源文件在磁盘中真正的样子。<br>
+我们将git的本地仓库(无工作去与暂存区)命名为<code class="notranslate">local</code>，数据一般在<code class="notranslate">.../example/.git</code>文件夹下，<br>
+将项目源文件在磁盘中真正的样子命名为<code class="notranslate">disk</code>。<br>
 现在Remote、Local、Disk都一致。</p>
 <h3>修改代码</h3>
 <p>修改代码，第1件事，<del>大喊一声旺旺</del>建立一个新的<code class="notranslate">feature</code>branch分支。</p>
 <div class="highlight highlight-source-shell"><pre class="notranslate">git switch -c my-feature
 <span class="pl-c"><span class="pl-c">#</span> 创建git branch，防止污染主线</span></pre></div>
-<div class="highlight highlight-source-mermaid"><pre class="notranslate"><span class="pl-k">graph</span> <span class="pl-c1">TD</span>
-    <span class="pl-k">subgraph</span> <span class="pl-en">Local</span>
-        <span class="pl-ent">b1p2</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">{{</span></span> main <span class="pl-pds"><span class="pl-sg">}}</span></span></span>
-        <span class="pl-ent">b2p2</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">(</span></span> init <span class="pl-pds"><span class="pl-sg">)</span></span></span>
-        <span class="pl-ent">b3p2</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">{{</span></span> my-feature* <span class="pl-pds"><span class="pl-sg">}}</span></span></span>
-        <span class="pl-ent">b4p2</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">(</span></span> f-init <span class="pl-pds"><span class="pl-sg">)</span></span></span>
-        <span class="pl-ent">b1p2</span><span class="pl-k">--&gt;</span><span class="pl-ent">b2p2</span>
-        <span class="pl-ent">b3p2</span><span class="pl-k">-.-&gt;</span><span class="pl-ent">b4p2</span>
-        <span class="pl-ent">b2p2</span><span class="pl-k">-.</span><span class="pl-s">'git checkout -b my-feature'</span><span class="pl-k">.-&gt;</span><span class="pl-ent">b4p2</span>
-    <span class="pl-k">end</span></pre></div>
 <p>不要直接在<code class="notranslate">main</code>修改，不然不好回溯，不利于团队合作。<br>
 现在<code class="notranslate">main</code>branch与<code class="notranslate">my-feature</code>branch一样。<br>
-这里<code class="notranslate">disk</code>也标为<code class="notranslate">my-feature</code>只是因为<code class="notranslate">disk</code>上的源代码被同步变成与其一致了，与branch无关。</p>
+这里<code class="notranslate">disk</code>上的源代码被同步变成与<code class="notranslate">my-feature</code>一致了，与branch无关。</p>
 <p>写代码ing...</p>
 <p>终于完成了，保存文件。<br>
 用这段命令来查看当前源代码与git保存的代码的区别。</p>
 <div class="highlight highlight-source-shell"><pre class="notranslate">git diff
 <span class="pl-c"><span class="pl-c">#</span> 查看当前磁盘修改代码与git仓库代码的差别</span></pre></div>
-<div class="highlight highlight-source-mermaid"><pre class="notranslate"><span class="pl-k">graph</span> <span class="pl-c1">TD</span>
-    <span class="pl-k">subgraph</span> <span class="pl-en">Disk</span>
-        <span class="pl-ent">b1p3</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">{{</span></span> my-feature <span class="pl-pds"><span class="pl-sg">}}</span></span></span>
-        <span class="pl-ent">b2p3</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">(</span></span> f-init <span class="pl-pds"><span class="pl-sg">)</span></span></span>
-        <span class="pl-ent">b3p3</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">&gt;</span></span> changes <span class="pl-pds"><span class="pl-sg">]</span></span></span>
-        <span class="pl-ent">b1p3</span><span class="pl-k">--&gt;</span><span class="pl-ent">b2p3</span><span class="pl-k">-.</span><span class="pl-s">'git diff' to get changes</span><span class="pl-k">.-&gt;</span><span class="pl-ent">b3p3</span>
-    <span class="pl-k">end</span></pre></div>
 <p>终于完成了，让我们把修改文件放入git暂存区中。</p>
 <div class="highlight highlight-source-shell"><pre class="notranslate">git add <span class="pl-k">&lt;</span>changed_file<span class="pl-k">&gt;</span>
 <span class="pl-c"><span class="pl-c">#</span> 添加&lt;changed_file&gt;到git暂存区</span>
@@ -167,130 +127,39 @@ git add <span class="pl-c1">.</span>
 <p>好，一切检查就绪，把它加入git仓库！？！</p>
 <div class="highlight highlight-source-shell"><pre class="notranslate">git commit [ -m <span class="pl-k">&lt;</span>explanation<span class="pl-k">&gt;</span> ]
 <span class="pl-c"><span class="pl-c">#</span> 添加暂存区的文件到git仓库，'-m' 可添加描述。</span></pre></div>
-<div class="highlight highlight-source-mermaid"><pre class="notranslate"><span class="pl-k">graph</span> <span class="pl-c1">TD</span>
-    <span class="pl-k">subgraph</span> <span class="pl-en">Local</span>
-        <span class="pl-ent">b1p2</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">{{</span></span> main <span class="pl-pds"><span class="pl-sg">}}</span></span></span>
-        <span class="pl-ent">b2p2</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">(</span></span> init <span class="pl-pds"><span class="pl-sg">)</span></span></span>
-        <span class="pl-ent">b3p2</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">{{</span></span> my-feature* <span class="pl-pds"><span class="pl-sg">}}</span></span></span>
-        <span class="pl-ent">b4p2</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">(</span></span> f-init <span class="pl-pds"><span class="pl-sg">)</span></span></span>
-        <span class="pl-ent">b5p2</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">(</span></span> f-commit <span class="pl-pds"><span class="pl-sg">)</span></span></span>
-        <span class="pl-ent">b1p2</span><span class="pl-k">--&gt;</span><span class="pl-ent">b2p2</span>
-        <span class="pl-ent">b3p2</span><span class="pl-k">--&gt;</span><span class="pl-ent">b4p2</span><span class="pl-k">-.-&gt;</span><span class="pl-ent">b5p2</span>
-    <span class="pl-k">end</span>
-    <span class="pl-k">subgraph</span> <span class="pl-en">Disk</span>
-        <span class="pl-ent">b1p3</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">{{</span></span> my-feature <span class="pl-pds"><span class="pl-sg">}}</span></span></span>
-        <span class="pl-ent">b2p3</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">(</span></span> f-init <span class="pl-pds"><span class="pl-sg">)</span></span></span>
-        <span class="pl-ent">b3p3</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">(</span></span> f-commit <span class="pl-pds"><span class="pl-sg">)</span></span></span>
-        <span class="pl-ent">b1p3</span><span class="pl-k">--&gt;</span><span class="pl-ent">b2p3</span><span class="pl-k">--&gt;</span><span class="pl-ent">b3p3</span>
-    <span class="pl-k">end</span>
-    <span class="pl-ent">b3p3</span><span class="pl-k">-.</span><span class="pl-s">'git commit [-m explanation]'</span><span class="pl-k">.-&gt;</span><span class="pl-ent">b5p2</span></pre></div>
 <h3>推入云端</h3>
-<p>还有谁记得GitHub吗。。。</p>
+<p>现在GitHub还一无所知，所以我们将代码推入<code class="notranslate">remote</code></p>
 <div class="highlight highlight-source-shell"><pre class="notranslate">git push origin my-feature
 <span class="pl-c"><span class="pl-c">#</span> 将'my-feature'推入云端</span></pre></div>
-<div class="highlight highlight-source-mermaid"><pre class="notranslate"><span class="pl-k">graph</span> <span class="pl-c1">TD</span>
-    <span class="pl-k">subgraph</span> <span class="pl-en">Remote</span>
-        <span class="pl-ent">b1p1</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">{{</span></span> main <span class="pl-pds"><span class="pl-sg">}}</span></span></span>
-        <span class="pl-ent">b2p1</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">(</span></span> init <span class="pl-pds"><span class="pl-sg">)</span></span></span>
-        <span class="pl-ent">b1p1</span><span class="pl-k">--&gt;</span><span class="pl-ent">b2p1</span>
-
-        <span class="pl-ent">b3p1</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">{{</span></span> my-feature <span class="pl-pds"><span class="pl-sg">}}</span></span></span>
-        <span class="pl-ent">b4p1</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">(</span></span> f-init <span class="pl-pds"><span class="pl-sg">)</span></span></span>
-        <span class="pl-ent">b5p1</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">(</span></span> f-commit <span class="pl-pds"><span class="pl-sg">)</span></span></span>
-        <span class="pl-ent">b3p1</span><span class="pl-k">--&gt;</span><span class="pl-ent">b4p1</span><span class="pl-k">-.-&gt;</span><span class="pl-ent">b5p1</span>
-    <span class="pl-k">end</span>
-    <span class="pl-k">subgraph</span> <span class="pl-en">Local</span>
-        <span class="pl-ent">b1p2</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">{{</span></span> main <span class="pl-pds"><span class="pl-sg">}}</span></span></span>
-        <span class="pl-ent">b2p2</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">(</span></span> init <span class="pl-pds"><span class="pl-sg">)</span></span></span>
-        <span class="pl-ent">b1p2</span><span class="pl-k">--&gt;</span><span class="pl-ent">b2p2</span>
-
-        <span class="pl-ent">b3p2</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">{{</span></span> my-feature* <span class="pl-pds"><span class="pl-sg">}}</span></span></span>
-        <span class="pl-ent">b4p2</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">(</span></span> f-init <span class="pl-pds"><span class="pl-sg">)</span></span></span>
-        <span class="pl-ent">b5p2</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">(</span></span> f-commit <span class="pl-pds"><span class="pl-sg">)</span></span></span>        
-        <span class="pl-ent">b3p2</span><span class="pl-k">--&gt;</span><span class="pl-ent">b4p2</span><span class="pl-k">--&gt;</span><span class="pl-ent">b5p2</span>
-    <span class="pl-k">end</span>
-    <span class="pl-ent">b5p2</span><span class="pl-k">-.</span><span class="pl-s">'git push origin my-feature'</span><span class="pl-k">.-&gt;</span><span class="pl-ent">b5p1</span></pre></div>
 <p>好，推送完成</p>
-<h2>老了老了。。。</h2>
-<div class="highlight highlight-source-mermaid"><pre class="notranslate"><span class="pl-k">graph</span> <span class="pl-c1">TD</span>
-    <span class="pl-k">subgraph</span> <span class="pl-en">Remote</span>
-        <span class="pl-ent">b1p1</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">{{</span></span> main <span class="pl-pds"><span class="pl-sg">}}</span></span></span>
-        <span class="pl-ent">b2p1</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">(</span></span> init <span class="pl-pds"><span class="pl-sg">)</span></span></span>
-        <span class="pl-ent">b6p1</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">(</span></span> update <span class="pl-pds"><span class="pl-sg">)</span></span></span>
-        <span class="pl-ent">b1p1</span><span class="pl-k">--&gt;</span><span class="pl-ent">b2p1</span><span class="pl-k">--&gt;</span><span class="pl-ent">b6p1</span>
-
-        <span class="pl-ent">b3p1</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">{{</span></span> my-feature <span class="pl-pds"><span class="pl-sg">}}</span></span></span>
-        <span class="pl-ent">b4p1</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">(</span></span> f-init <span class="pl-pds"><span class="pl-sg">)</span></span></span>
-        <span class="pl-ent">b5p1</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">(</span></span> f-commit <span class="pl-pds"><span class="pl-sg">)</span></span></span>
-        <span class="pl-ent">b3p1</span><span class="pl-k">--&gt;</span><span class="pl-ent">b4p1</span><span class="pl-k">--&gt;</span><span class="pl-ent">b5p1</span>
-    <span class="pl-k">end</span></pre></div>
-<p>费力 == 9*牛+2*虎，上传之后发现main早更新了，自己还在傻乎乎地改<strong>劳代码</strong>。<br>
+<h3>老了老了...</h3>
+<p>费力 == 9*牛+2*虎，上传之后发现main早更新到<code class="notranslate">update</code>了，自己还在傻乎乎地改<strong>劳代码</strong>。<br>
 气煞我也，我直接拉取新的代码，</p>
 <div class="highlight highlight-source-shell"><pre class="notranslate">git switch main
 git pull origin main
 <span class="pl-c"><span class="pl-c">#</span> 切换到main分支并拉取代码，方便统一管理</span></pre></div>
-<div class="highlight highlight-source-mermaid"><pre class="notranslate"><span class="pl-k">graph</span> <span class="pl-c1">TD</span>
-    <span class="pl-k">subgraph</span> <span class="pl-en">Remote</span>
-        <span class="pl-ent">b1p1</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">{{</span></span> main <span class="pl-pds"><span class="pl-sg">}}</span></span></span>
-        <span class="pl-ent">b2p1</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">(</span></span> init <span class="pl-pds"><span class="pl-sg">)</span></span></span>
-        <span class="pl-ent">b6p1</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">(</span></span> update <span class="pl-pds"><span class="pl-sg">)</span></span></span>
-        <span class="pl-ent">b1p1</span><span class="pl-k">--&gt;</span><span class="pl-ent">b2p1</span><span class="pl-k">--&gt;</span><span class="pl-ent">b6p1</span>
-
-        <span class="pl-ent">b3p1</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">{{</span></span> my-feature <span class="pl-pds"><span class="pl-sg">}}</span></span></span>
-        <span class="pl-ent">b4p1</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">(</span></span> f-init <span class="pl-pds"><span class="pl-sg">)</span></span></span>
-        <span class="pl-ent">b5p1</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">(</span></span> f-commit <span class="pl-pds"><span class="pl-sg">)</span></span></span>
-        <span class="pl-ent">b3p1</span><span class="pl-k">--&gt;</span><span class="pl-ent">b4p1</span><span class="pl-k">--&gt;</span><span class="pl-ent">b5p1</span>
-    <span class="pl-k">end</span>
-    <span class="pl-k">subgraph</span> <span class="pl-en">Local</span>
-        <span class="pl-ent">b1p2</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">{{</span></span> main* <span class="pl-pds"><span class="pl-sg">}}</span></span></span>
-        <span class="pl-ent">b2p2</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">(</span></span> init <span class="pl-pds"><span class="pl-sg">)</span></span></span>
-        <span class="pl-ent">b6p2</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">(</span></span> update <span class="pl-pds"><span class="pl-sg">)</span></span></span>
-        <span class="pl-ent">b1p2</span><span class="pl-k">--&gt;</span><span class="pl-ent">b2p2</span><span class="pl-k">-.-&gt;</span><span class="pl-ent">b6p2</span>
-
-        <span class="pl-ent">b3p2</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">{{</span></span> my-feature <span class="pl-pds"><span class="pl-sg">}}</span></span></span>
-        <span class="pl-ent">b4p2</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">(</span></span> f-init <span class="pl-pds"><span class="pl-sg">)</span></span></span>
-        <span class="pl-ent">b5p2</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">(</span></span> f-commit <span class="pl-pds"><span class="pl-sg">)</span></span></span>        
-        <span class="pl-ent">b3p2</span><span class="pl-k">--&gt;</span><span class="pl-ent">b4p2</span><span class="pl-k">--&gt;</span><span class="pl-ent">b5p2</span>
-    <span class="pl-k">end</span>
-    <span class="pl-ent">b6p1</span><span class="pl-k">-.</span><span class="pl-s">'git pull origin main'</span><span class="pl-k">.-&gt;</span><span class="pl-ent">b6p2</span></pre></div>
-<p>切换回<code class="notranslate">my-feature</code>分支，不管3*7得21，把自己的更新先扔一边，把update先适配了。</p>
+<p>切换回<code class="notranslate">my-feature</code>分支，不管3*7得21，把自己的更新先扔一边，把<code class="notranslate">update</code>先适配了。</p>
 <div class="highlight highlight-source-shell"><pre class="notranslate">git switch feature
 <span class="pl-c"><span class="pl-c">#</span> 切换到feature分支</span>
 git rebase main
 <span class="pl-c"><span class="pl-c">#</span> 把最新的main拉进来，local feature结构：init -&gt; update(最新main) -&gt; f-commit(你的修改)</span></pre></div>
-<p>解决冲突ing。。。</p>
+<p>解决冲突ing...</p>
 <p>解决了，提交！？！</p>
-<div class="highlight highlight-source-mermaid"><pre class="notranslate"><span class="pl-k">graph</span> <span class="pl-c1">TD</span>
-    <span class="pl-k">subgraph</span> <span class="pl-en">Remote</span>
-        <span class="pl-ent">b1p1</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">{{</span></span> main <span class="pl-pds"><span class="pl-sg">}}</span></span></span>
-        <span class="pl-ent">b2p1</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">(</span></span> init <span class="pl-pds"><span class="pl-sg">)</span></span></span>
-        <span class="pl-ent">b6p1</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">(</span></span> update <span class="pl-pds"><span class="pl-sg">)</span></span></span>
-        <span class="pl-ent">b1p1</span><span class="pl-k">--&gt;</span><span class="pl-ent">b2p1</span><span class="pl-k">--&gt;</span><span class="pl-ent">b6p1</span>
-
-        <span class="pl-ent">b3p1</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">{{</span></span> my-feature <span class="pl-pds"><span class="pl-sg">}}</span></span></span>
-        <span class="pl-ent">b4p1</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">(</span></span> f-init <span class="pl-pds"><span class="pl-sg">)</span></span></span>
-        <span class="pl-ent">b5p1</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">(</span></span> f-commit <span class="pl-pds"><span class="pl-sg">)</span></span></span>
-        <span class="pl-ent">b3p1</span><span class="pl-k">--&gt;</span><span class="pl-ent">b4p1</span><span class="pl-k">--&gt;</span><span class="pl-ent">b5p1</span>
-    <span class="pl-k">end</span>
-    <span class="pl-k">subgraph</span> <span class="pl-en">Local</span>
-        <span class="pl-ent">b1p2</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">{{</span></span> main <span class="pl-pds"><span class="pl-sg">}}</span></span></span>
-        <span class="pl-ent">b2p2</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">(</span></span> init <span class="pl-pds"><span class="pl-sg">)</span></span></span>
-        <span class="pl-ent">b6p2</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">(</span></span> update <span class="pl-pds"><span class="pl-sg">)</span></span></span>
-        <span class="pl-ent">b1p2</span><span class="pl-k">--&gt;</span><span class="pl-ent">b2p2</span><span class="pl-k">--&gt;</span><span class="pl-ent">b6p2</span>
-
-        <span class="pl-ent">b3p2</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">{{</span></span> my-feature* <span class="pl-pds"><span class="pl-sg">}}</span></span></span>
-        <span class="pl-ent">b4p2</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">(</span></span> f-init <span class="pl-pds"><span class="pl-sg">)</span></span></span>
-        <span class="pl-ent">b5p2</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">(</span></span> f-commit <span class="pl-pds"><span class="pl-sg">)</span></span></span>       
-        <span class="pl-ent">b7p2</span><span class="pl-s"><span class="pl-pds"><span class="pl-sg">(</span></span> update <span class="pl-pds"><span class="pl-sg">)</span></span></span> 
-        <span class="pl-ent">b3p2</span><span class="pl-k">--&gt;</span><span class="pl-ent">b4p2</span><span class="pl-k">--&gt;</span><span class="pl-ent">b7p2</span><span class="pl-k">--&gt;</span><span class="pl-ent">b5p2</span>
-    <span class="pl-k">end</span>
-    <span class="pl-ent">b6p2</span><span class="pl-k">-.</span><span class="pl-s">'git rebase main'</span><span class="pl-k">.-&gt;</span><span class="pl-ent">b7p2</span></pre></div>
+<div class="highlight highlight-source-shell"><pre class="notranslate">git push -f origin my-feature
+<span class="pl-c"><span class="pl-c">#</span> 提交兼容后的'my-feature'分支</span></pre></div>
 <p>终终终终于写完了！！！<br>
 彻底提交，我再也不想看见git了（没错）</p>
 <div class="highlight highlight-source-shell"><pre class="notranslate">git push -f origin my-feature
 <span class="pl-c"><span class="pl-c">#</span> 提交兼容后的'my-feature'分支</span></pre></div>
 <h2>总结</h2>
-<p>阿巴阿巴合并之后就成功得到了一个没什么用的贡献，我成功用一篇没什么用的博客浪费了我10个小时。</p></div>
+<p>阿巴阿巴合并<sup><a href="#user-content-fn-1-a0b2cf152159e3729feaa797c0175e6e" id="user-content-fnref-1-a0b2cf152159e3729feaa797c0175e6e" data-footnote-ref="" aria-describedby="footnote-label">1</a></sup>之后就成功得到了一个没什么用的贡献，我成功用一篇没什么用的博客浪费了我10个小时。</p>
+<section data-footnotes="" class="footnotes"><h2 id="footnote-label" class="sr-only">Footnotes</h2>
+<ol>
+<li id="user-content-fn-1-a0b2cf152159e3729feaa797c0175e6e">
+<p>需要在GitHub客户端进行操作，因为会有提示，且未涉及命令行操作，所以不做说明。 <a href="#user-content-fnref-1-a0b2cf152159e3729feaa797c0175e6e" data-footnote-backref="" aria-label="Back to reference 1" class="data-footnote-backref">↩</a></p>
+</li>
+</ol>
+</section></div>
 <div style="font-size:small;margin-top:8px;float:right;">转载请注明出处</div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
