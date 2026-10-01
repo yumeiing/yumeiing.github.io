@@ -17,7 +17,7 @@ Linux/MacOS中为`~/.vimrc`或`~/.vim/vimrc`，
 Windows为`C:\Users\用户名\_vimrc`。
 ## 基础配置
 vim内置了许多功能，对于基本的文字编辑工作已经够用了。
-|名称|含义|我的示例|
+|名称|含义|我的示例[^1]|
 |:---|:---|:-------|
 |nocompatible|禁用 vi 兼容模式，启用 Vim 特性|set nocompatible|
 |syntax|开启语法高亮|syntax on|
@@ -45,6 +45,7 @@ vim内置了许多功能，对于基本的文字编辑工作已经够用了。
 |foldmethod|语法折叠|set foldmethod=syntax|
 |foldlevel|默认全打开|set foldlevel=99|
 |foldcolumn|处显示一行|set foldcolumn=1|
+[^1]:“号的意思是注释，也就是不启用
 ## LSP插件配置
 这里的LSP插件使用[lsp](https://github.com/yegappan/lsp)。
 这是一个**vim9原生语言**编写的插件。
